@@ -10,7 +10,6 @@ import com.google.android.gms.ads.MobileAds
 
 class MyCubePuzzlePhotoApplication : Application(), Application.ActivityLifecycleCallbacks {
 
-    
     private lateinit var appOpenAdManager: CubePuzzlePhotoOpenAdManager
     private var currentActivity: Activity? = null
 
