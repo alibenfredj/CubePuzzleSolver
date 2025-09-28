@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>3D Picture Cube</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app-container">
+    <header>
+        <div id="timer-display">00:00</div>
+    </header>
+    <div id="canvas-container"></div>
+    <footer>
+        <div class="difficulty-controls">
+            <button class="difficulty-btn" data-difficulty="Easy">Easy</button>
+            <button class="difficulty-btn active" data-difficulty="Medium">Medium</button>
+            <button class="difficulty-btn" data-difficulty="Hard">Hard</button>
+        </div>
+        <div class="moves-grid">
+            <button class="move-btn" data-move="U">U</button>
+            <button class="move-btn" data-move="D">D</button>
+            <button class="move-btn" data-move="L">L</button>
+            <button class="move-btn" data-move="R">R</button>
+            <button class="move-btn" data-move="F">F</button>
+            <button class="move-btn" data-move="B">B</button>
+        </div>
+        <div class="main-controls">
+            <button class="action-btn" id="hint-btn" title="Hint">
+                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path></svg>
+            </button>
+            <button class="action-btn" id="undo-btn" title="Undo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>
+            </button>
+            <button class="action-btn" id="shuffle-btn" title="Shuffle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+            </button>
+            <button class="action-btn" id="prime-toggle-btn" title="Toggle Prime Moves (')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 2v6h6M2.66 15.57a10 10 0 1 0 .57-8.38"></path></svg>
+            </button>
+            <button class="action-btn" id="reset-btn" title="Reset">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"></path></svg>
+            </button>
+            <button class="action-btn" id="instructions-btn" title="How to Play">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </button>
+        </div>
+    </footer>
+</div>
+<div id="overlay"></div>
+<div id="instructions-panel">
+    <div class="instructions-header">
+        <h2>How to Play</h2>
+        <button id="close-instructions-btn">×</button>
+    </div>
+    <div id="instructions-content">
+        <p><strong>Difficulty:</strong> First, select <strong>Easy, Medium,</strong> or <strong>Hard</strong>. This sets up the next puzzle.</p>
+        <p><strong>Start Game:</strong> Hit the <strong>Shuffle</strong> button to scramble the cube based on the difficulty you chose. The timer starts on your first move.</p>
+        <p><strong>Camera:</strong> Drag the <strong>background</strong> to orbit and view the cube from different angles.</p>
+        <p><strong>Swipe to Rotate:</strong> Drag directly on a <strong>cube piece</strong> to rotate its face.</p>
+        <p><strong>Button Moves:</strong> Use the <strong>U, D, L, R, F, B</strong> buttons for precise, single turns.</p>
+        <p><strong>Prime Moves:</strong> Tap the <strong>Prime (')</strong> button to toggle counter-clockwise moves (e.g., U becomes U').</p>
+        <p><strong>Undo:</strong> Made a mistake? Use the <strong>Undo</strong> button to reverse your last move.</p>
+        <p><strong>Hint:</strong> Stuck? The <strong>Hint</strong> button will highlight the next correct move to help you solve the puzzle.</p>
+        <p><strong>Reset Cube:</strong> The <strong>Reset</strong> button will return the cube to its solved state at any time.</p>
+    </div>
+</div>
+<div id="solved-popup">You Solved It!<br><span id="final-time" style="font-size: 0.8em;"></span></div>
+<div id="ad-placeholder"></div>
+<audio id="click-sound" src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjQ1LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/80DEAAP4AAAAHzwIAAAB2AAADSAAAANgAAAZGAAACsAAAADyVAAAAgAAAAVsAAAEzAAAAoAAAASsAAAFIAAACiQAAAkIAAAJ/AAAAoAAAASgAAANPAAAA4AAAAP8AAAA/AAAAMQAAAKAAAAGAAgACgoB//80DEgAABMAAABIRAFAUQIACgACgoCAgICAgEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQECAgEBAgEBAgEBAQEB//80DEgAsQAAAAAAAMwAAAeQAAAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEgAsQAAAAAAAMwAAAeQAAAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEgAsQAAAAAAAMwAAAeQAAAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEgAsQAAAAAAAMwAAAeQAAAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/erAAA=" preload="auto"></audio>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

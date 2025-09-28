@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The root element is now RelativeLayout again. The <layout> tag has been removed. -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f2f5"
+    tools:context=".SplashActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="320dp"
+        android:layout_height="720dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_ppcube_splash"
+        android:contentDescription="@string/app_name" />
+
+</RelativeLayout>

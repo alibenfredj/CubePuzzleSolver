@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home" />
+
+    <item
+        android:id="@+id/nav_rate"
+        android:title="Rate App"
+        android:icon="@drawable/ic_star" />
+    <item
+        android:id="@+id/privacy_policy"
+        android:title="Privacy Policy"
+        android:icon="@drawable/ic_policy" />
+
+    <item
+        android:id="@+id/nav_other_apps"
+        android:title="Other Apps"
+        android:icon="@drawable/ic_apps" />
+
+</menu>
